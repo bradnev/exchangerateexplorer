@@ -5,9 +5,11 @@ import pandas as pd
 import plotly.express as px
 from dash import Dash, html, dash_table, dcc
 
+app = Dash(__name__)
+server = app.server
+
 while 0==0:
-    app = Dash(__name__)
-    server = app.server
+
     uri = "mongodb+srv://robertneville083:h@cluster0.i6sbepa.mongodb.net/?retryWrites=true&w=majority"
     client = pymongo.MongoClient(uri, ssl_cert_reqs=ssl.CERT_NONE)
     
