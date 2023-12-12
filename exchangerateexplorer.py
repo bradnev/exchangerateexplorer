@@ -7,7 +7,7 @@ from dash import Dash, html, dash_table, dcc
 
 while 0==0:
     app = Dash(__name__)
-
+    server = app.server
     uri = "mongodb+srv://robertneville083:h@cluster0.i6sbepa.mongodb.net/?retryWrites=true&w=majority"
     client = pymongo.MongoClient(uri, ssl_cert_reqs=ssl.CERT_NONE)
     
@@ -27,6 +27,6 @@ while 0==0:
     ])
 
     if __name__ == '__main__':
-        app.run(port = 2223, debug=True) #Note port errors exist, 2223 is free for me but the default was not.
+        app.run_server(port = 2223, debug=False) #Note port errors exist, 2223 is free for me but the default was not.
     
     time.sleep(60*60*24) #1 day wait
