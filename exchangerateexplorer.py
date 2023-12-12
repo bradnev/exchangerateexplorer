@@ -1,34 +1,31 @@
-import pymongo
-import ssl #SSL does not work properly.  We will have an insecure connection but I do not care.
-import time
-import pandas as pd
+from dash import Dash, html, dcc
 import plotly.express as px
-from dash import Dash, html, dash_table, dcc
+import pandas as pd
 
 app = Dash(__name__)
 server = app.server
+# assume you have a "long-form" data frame
+# see https://plotly.com/python/px-arguments/ for more options
+df = pd.DataFrame({
+    "Fruit": ["Apples", "Oranges", "Bananas", "Apples", "Oranges", "Bananas"],
+    "Amount": [4, 1, 2, 2, 4, 5],
+    "City": ["SF", "SF", "SF", "Montreal", "Montreal", "Montreal"]
+})
 
-while 0==0:
+fig = px.bar(df, x="Fruit", y="Amount", color="City", barmode="group")
 
-    uri = "mongodb+srv://robertneville083:h@cluster0.i6sbepa.mongodb.net/?retryWrites=true&w=majority"
-    client = pymongo.MongoClient(uri, ssl_cert_reqs=ssl.CERT_NONE)
-    
-    db = client.currency
-    collection = db.currency #enter the collection
-    df = pd.DataFrame(list(collection.find({}))) #Convert MongoDB database into Pandas Dataframe.
-    df["Percent Difference From 30 Day Average"] = 100 * (df["Exchange Rate (1 USD)"] - df["30 Day Average"])/df["30 Day Average"]
-    df["Percent Difference From 90 Day Average"] = 100 * (df["Exchange Rate (1 USD)"] - df["90 Day Average"])/df["90 Day Average"]
-    fig = px.bar(df, x="Currency", y="90 Day Volatility")
-    fig2 = px.bar(df, x="Currency", y="Percent Difference From 90 Day Average")
-    app.layout = html.Div([
-        html.H1(children='Currency Exchange Information'),
-        html.P(children='Sourced From xe.com'),
-        dash_table.DataTable(data=df.to_dict('records'), page_size=10),
-        dcc.Graph(id='graph1',figure=fig),
-        dcc.Graph(id='graph2',figure=fig2)
-    ])
+app.layout = html.Div(children=[
+    html.H1(children='Hello Dash'),
 
-    if __name__ == '__main__':
-        app.run_server(port = 2223, debug=False) #Note port errors exist, 2223 is free for me but the default was not.
-    
-    time.sleep(60*60*24) #1 day wait
+    html.Div(children='''
+        Dash: A web application framework for your data.
+    '''),
+
+    dcc.Graph(
+        id='example-graph',
+        figure=fig
+    )
+])
+
+if __name__ == '__main__':
+    app.run(debug=False)
