@@ -4,3 +4,4 @@ gunicorn
 pymongo[srv]
 flask==2.2.2
 werkzeug==2.2.2
+ssl
