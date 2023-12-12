@@ -4,4 +4,3 @@ gunicorn
 pymongo[srv]
 ssl
 time
-pandas
