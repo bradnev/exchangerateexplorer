@@ -1,6 +1,6 @@
 dash==2.6.0
 pandas
-pymongo
+pymongo[srv]
 ssl
 time
 pandas
