@@ -1,5 +1,4 @@
 import pymongo
-import ssl #SSL does not work properly.  We will have an insecure connection but I do not care.
 import time
 import pandas as pd
 import plotly.express as px
@@ -11,7 +10,7 @@ server = app.server
 while 0==0:
 
     uri = "mongodb+srv://robertneville083:h@cluster0.i6sbepa.mongodb.net/?retryWrites=true&w=majority"
-    client = pymongo.MongoClient(uri, ssl_cert_reqs=ssl.CERT_NONE)
+    client = pymongo.MongoClient(uri)
     
     db = client.currency
     collection = db.currency #enter the collection
