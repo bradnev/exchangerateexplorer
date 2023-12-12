@@ -28,6 +28,6 @@ while 0==0:
     ])
 
     if __name__ == '__main__':
-        app.run_server(port = 2223, debug=False) #Note port errors exist, 2223 is free for me but the default was not.
+        app.run_server(port = 10000, debug=False) #Note port errors exist, 2223 is free for me but the default was not.
     
     time.sleep(60*60*24) #1 day wait
